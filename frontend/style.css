@@ -5,23 +5,67 @@
     padding: 0;
 }
 
-/* CSS Variables */
+/* CSS Variables - Dark Theme (Default) - Optimized for Accessibility */
 :root {
-    --primary-color: #2563eb;
-    --primary-hover: #1d4ed8;
-    --background: #0f172a;
-    --surface: #1e293b;
-    --surface-hover: #334155;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --border-color: #334155;
-    --user-message: #2563eb;
-    --assistant-message: #374151;
+    /* Primary colors - Blue theme for consistency across themes */
+    --primary-color: #2563eb;        /* Blue-600: Accessible accent color */
+    --primary-hover: #1d4ed8;        /* Blue-700: Darker for hover states */
+
+    /* Background layers - Progressive depth */
+    --background: #0f172a;           /* Slate-900: Main background */
+    --surface: #1e293b;              /* Slate-800: Cards and elevated surfaces */
+    --surface-hover: #334155;        /* Slate-700: Hover state for interactive surfaces */
+
+    /* Text colors - High contrast for dark backgrounds */
+    --text-primary: #f1f5f9;         /* Slate-100: Primary text (contrast ratio ~14:1) */
+    --text-secondary: #94a3b8;       /* Slate-400: Secondary text (contrast ratio ~7:1) */
+
+    /* Borders and dividers */
+    --border-color: #334155;         /* Slate-700: Subtle borders */
+
+    /* Message bubbles */
+    --user-message: #2563eb;         /* Blue-600: User messages */
+    --assistant-message: #374151;    /* Gray-700: Assistant messages */
+
+    /* Effects */
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    --radius: 12px;
+    --radius: 12px;                  /* Border radius for rounded elements */
     --focus-ring: rgba(37, 99, 235, 0.2);
-    --welcome-bg: #1e3a5f;
-    --welcome-border: #2563eb;
+
+    /* Special states */
+    --welcome-bg: #1e3a5f;           /* Deep blue: Welcome message background */
+    --welcome-border: #2563eb;       /* Blue-600: Accent border */
+}
+
+/* Light Theme - Optimized for Accessibility (WCAG AAA) */
+[data-theme="light"] {
+    /* Primary colors - Blue theme maintained for consistency */
+    --primary-color: #2563eb;        /* Blue-600: Accessible on white */
+    --primary-hover: #1d4ed8;        /* Blue-700: Darker for hover states */
+
+    /* Background layers - Progressive depth */
+    --background: #f8fafc;           /* Slate-50: Main background */
+    --surface: #ffffff;              /* White: Cards and elevated surfaces */
+    --surface-hover: #f1f5f9;        /* Slate-100: Hover state for interactive surfaces */
+
+    /* Text colors - High contrast for readability */
+    --text-primary: #0f172a;         /* Slate-900: Primary text (contrast ratio ~16:1) */
+    --text-secondary: #475569;       /* Slate-600: Secondary text (contrast ratio ~8:1, WCAG AAA) */
+
+    /* Borders and dividers */
+    --border-color: #e2e8f0;         /* Slate-200: Subtle borders */
+
+    /* Message bubbles */
+    --user-message: #2563eb;         /* Blue-600: User messages (white text) */
+    --assistant-message: #f1f5f9;    /* Slate-100: Assistant messages (dark text) */
+
+    /* Effects */
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --focus-ring: rgba(37, 99, 235, 0.2);
+
+    /* Special states */
+    --welcome-bg: #eff6ff;           /* Blue-50: Welcome message background */
+    --welcome-border: #2563eb;       /* Blue-600: Accent border */
 }
 
 /* Base Styles */
@@ -34,6 +78,67 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+.theme-toggle:hover {
+    background: var(--surface-hover);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--focus-ring), var(--shadow);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-icon {
+    position: absolute;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.sun-icon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.8);
+}
+
+.moon-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+[data-theme="light"] .sun-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+[data-theme="light"] .moon-icon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.8);
 }
 
 /* Container - Full Screen */
@@ -83,6 +188,7 @@ header h1 {
     padding: 1.5rem;
     overflow-y: auto;
     flex-shrink: 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Custom Scrollbar for Sidebar */
@@ -194,6 +300,7 @@ header h1 {
     width: 100%;
     max-width: 800px;
     margin: 0;
+    transition: background-color 0.3s ease;
 }
 
 /* Chat Messages */
@@ -205,6 +312,7 @@ header h1 {
     flex-direction: column;
     gap: 1rem;
     background: var(--background);
+    transition: background-color 0.3s ease;
 }
 
 /* Custom Scrollbar */
@@ -255,6 +363,7 @@ header h1 {
     border-radius: 18px;
     word-wrap: break-word;
     line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .message.user .message-content {
@@ -423,6 +532,7 @@ header h1 {
     background: var(--background);
     border-top: 1px solid var(--border-color);
     flex-shrink: 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Chat Input */
@@ -434,7 +544,7 @@ header h1 {
     border-radius: 24px;
     color: var(--text-primary);
     font-size: 0.95rem;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 #chatInput:focus {
@@ -597,6 +707,7 @@ details[open] .suggested-header::before {
     border-radius: 8px;
     border: 1px solid var(--border-color);
     margin-bottom: 0.75rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .stat-item:last-child {
@@ -706,7 +817,7 @@ details[open] .suggested-header::before {
     color: var(--text-primary);
     font-size: 0.875rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     text-align: left;
     width: 100%;
 }
@@ -725,10 +836,17 @@ details[open] .suggested-header::before {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .theme-toggle {
+        top: 1rem;
+        right: 1rem;
+        width: 44px;
+        height: 44px;
+    }
+
     .main-content {
         flex-direction: column;
     }
-    
+
     .sidebar {
         width: 100%;
         border-right: none;
