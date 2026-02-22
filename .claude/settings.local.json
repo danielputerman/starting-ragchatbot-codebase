@@ -9,7 +9,9 @@
       "mcp__playwright__browser_type",
       "Bash(curl:*)",
       "Bash(python3:*)",
-      "Bash(lsof:*)"
+      "Bash(lsof:*)",
+      "Bash(git checkout:*)",
+      "Bash(uv lock:*)"
     ]
   }
 }
