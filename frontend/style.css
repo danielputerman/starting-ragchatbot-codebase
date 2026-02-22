@@ -111,6 +111,69 @@ header h1 {
     margin-bottom: 0;
 }
 
+/* New Chat Button Container */
+.new-chat-container {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* New Chat Button */
+.new-chat-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.new-chat-button:hover {
+    color: var(--primary-color);
+}
+
+.new-chat-button:active {
+    color: var(--primary-color);
+}
+
+.new-chat-button:focus {
+    outline: none;
+    color: var(--primary-color);
+}
+
+.new-chat-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.new-chat-text {
+    line-height: 1;
+}
+
+/* Animation for clearing chat */
+@keyframes fadeOutChat {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.clearing-chat .message:not(.welcome-message) {
+    animation: fadeOutChat 0.2s ease-out forwards;
+}
+
 /* Main Chat Area */
 .chat-main {
     flex: 1;
@@ -242,6 +305,32 @@ header h1 {
 
 .sources-content {
     padding: 0 0.5rem 0.25rem 1.5rem;
+    color: var(--text-secondary);
+}
+
+/* Clickable source links */
+.sources-content a.source-link {
+    color: var(--primary-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 2px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.sources-content a.source-link:hover {
+    color: var(--primary-hover);
+    text-decoration-thickness: 2px;
+    text-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+}
+
+.sources-content a.source-link:focus {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.sources-content span.source-text {
     color: var(--text-secondary);
 }
 
