@@ -32,6 +32,31 @@ uv run python <filename>.py     # Always use uv run, not python directly
 - Web UI: http://localhost:8000
 - API Docs: http://localhost:8000/docs
 
+## Code Quality
+
+**Tools:**
+- `ruff` - Fast linter and formatter (replaces Black, isort, flake8)
+- `mypy` - Static type checker
+
+**Check Code Quality:**
+```bash
+./quality_check.sh           # Read-only checks (CI/review)
+```
+
+**Auto-Fix Issues:**
+```bash
+./quality_fix.sh             # Auto-format and fix linting
+```
+
+**Manual Commands:**
+```bash
+cd backend
+uv run ruff check .          # Check for issues
+uv run ruff check --fix .    # Auto-fix issues
+uv run ruff format .         # Format code
+uv run mypy .                # Type checking
+```
+
 ## Architecture
 
 ### RAG Pipeline Flow
